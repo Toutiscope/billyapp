@@ -9,13 +9,19 @@
     "electron:build": "vue-cli-service electron:build",
     "electron:serve": "vue-cli-service electron:serve",
     "postinstall": "electron-builder install-app-deps",
-    "postuninstall": "electron-builder install-app-deps"
+    "postuninstall": "electron-builder install-app-deps",
+    "start": "vue-cli-service electron:serve"
   },
   "main": "background.js",
   "dependencies": {
+    "axios": "^0.21.0",
     "core-js": "^3.6.5",
+    "dns": "^0.2.2",
+    "module": "^1.2.5",
+    "mongodb": "^3.6.3",
     "register-service-worker": "^1.7.1",
     "vue": "^2.6.11",
+    "vue-axios": "^3.2.0",
     "vue-router": "^3.2.0",
     "vuex": "^3.4.0"
   },
