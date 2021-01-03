@@ -1,18 +1,37 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <img alt="Illustration" src="../assets/home-illu.svg" />
+    <Nav/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import Nav from "@/components/Nav.vue";
 
 export default {
   name: "Home",
   components: {
-    HelloWorld
+    Nav
   }
 };
 </script>
+
+
+<style lang="scss">
+@import "../styles/globalStyles.scss";
+
+
+.home {
+  height: 100%;
+}
+
+
+.home img {
+  position: fixed;
+  right: 35px;
+  top: -15px;
+  min-height: 100%;
+}
+
+</style>
