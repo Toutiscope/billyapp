@@ -2,7 +2,20 @@
   <div class="estimation">
     <div class="head">
       <div class="head--client">
-        <router-link to="#">
+        <div class="client-id" v-if="!client">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24">
+            <path
+              d="M12 5.9a2.1 2.1 0 110 4.2 2.1 2.1 0 010-4.2m0 9c2.97 0 6.1 1.46 6.1 2.1v1.1H5.9V17c0-.64 3.13-2.1 6.1-2.1M12 4C9.79 4 8 5.79 8 8s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 9c-2.67 0-8 1.34-8 4v3h16v-3c0-2.66-5.33-4-8-4z"
+            />
+          </svg>
+          <p>Monsieur Dupont</p>
+          <p>Nom de Société</p>
+          <p>4 rue Anita Conti</p>
+          <p>44300 NANTES</p>
+          <p>06 01 02 03 04</p>
+          <p>adresse-mail@gmail.com</p>
+        </div>
+        <router-link to="#" v-if="client">
           <div class="circle">
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32">
               <g fill="none" stroke="#fff" stroke-width="5">
@@ -15,7 +28,7 @@
       </div>
       <div class="head--meta">
         <h1>Devis n°1</h1>
-        <p>02/01/2021</p>
+        <p>{{ moment(new Date()).format('DD/MM/YYYY') }}</p>
       </div>
     </div>
 
@@ -68,7 +81,7 @@
         <label for="delivery-yes">Oui</label>
       </div>
       <p v-if="checked">Montant</p>
-      <input v-if="checked" type="text" placeholder="Frais de livraison en €" />
+      <input v-if="checked" required type="text" placeholder="Frais de livraison en €" />
     </div>
 
     <div class="validations">
@@ -83,10 +96,17 @@
 </template>
 
 <script>
+import Vue from "vue";
+import moment from "moment";
+
+Vue.prototype.moment = moment;
+
+
 export default {
   data() {
     return {
       checked: false,
+      client: false,
     };
   },
   methods: {
@@ -101,8 +121,11 @@ export default {
 @import "../styles/globalStyles.scss";
 
 .estimation {
-  width: 90%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   margin: auto;
+  width: 90%;
 }
 
 .head {
@@ -112,14 +135,53 @@ export default {
   padding-top: remCalc(50);
   width: 100%;
 
+  .client-id {
+    display: flex;
+    flex-flow: column wrap;
+    letter-spacing: 0;
+    margin: remCalc(10) auto;
+    max-height: remCalc(115);
+    text-align: left;
+
+    svg {
+      height: 80px;
+      margin: auto;
+      width: 80px;
+    }
+
+    path {
+      fill: var(--main-color);
+      transform: scale(3.5);
+    }
+
+    p {
+      line-height: remCalc(20);
+    }
+
+    p:nth-of-type(1) {
+      margin-top: remCalc(6);
+      text-align: center;
+    }
+
+    p:nth-of-type(5) {
+      margin-top: remCalc(6);
+    }
+
+    p:nth-of-type(5),
+    p:nth-of-type(6) {
+      font-weight: 300;
+    }
+  }
+
   &--client {
-    background: var(--main-light);
+    border: 3px solid var(--main-light);
     box-shadow: 4px 4px 9px rgba(0, 0, 0, 0.16);
-    min-width: 45%;
+    width: 45%;
 
     a {
-      display: flex;
       align-items: center;
+      background: var(--main-light);
+      display: flex;
       font-weight: bold;
       text-transform: uppercase;
 
@@ -171,6 +233,7 @@ export default {
 .add-product {
   align-items: center;
   display: flex;
+  max-width: 12em;
 
   p {
     font-weight: bold;
@@ -186,7 +249,7 @@ export default {
   grid-template-columns: 30% remCalc(250);
   grid-template-rows: auto auto;
   justify-content: flex-end;
-  margin: remCalc(60) 0 remCalc(60);
+  margin: remCalc(60) 0 remCalc(40);
   row-gap: remCalc(25);
 
   p {
@@ -215,6 +278,8 @@ export default {
 .validations {
   display: flex;
   justify-content: flex-end;
+  margin-top: auto;
+  margin-bottom: remCalc(40);
 
   button {
     border: 3px solid var(--second-color);
