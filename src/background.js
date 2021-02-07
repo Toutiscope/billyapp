@@ -24,9 +24,9 @@ async function createWindow() {
       nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION,
     },
   });
-  
-  mainWindow.once('ready-to-show', () => {
-    mainWindow.show()
+
+  mainWindow.once("ready-to-show", () => {
+    mainWindow.show();
   });
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
@@ -128,6 +128,12 @@ const mainMenuTemplate = [
         },
       },
     ],
+  },
+  {
+    label: "Précédent",
+    click() {
+      mainWindow.webContents.goBack();
+    },
   },
 ];
 

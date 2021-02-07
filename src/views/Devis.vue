@@ -15,7 +15,7 @@
           <p>06 01 02 03 04</p>
           <p>adresse-mail@gmail.com</p>
         </router-link>
-        <router-link class="add-client" to="/client" v-if="!client">
+        <router-link class="add-client" to="/clientsliste" v-if="!client">
           <div class="circle">
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32">
               <g fill="none" stroke="#fff" stroke-width="5">

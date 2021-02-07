@@ -29,10 +29,10 @@
         <label for="company" class="pro">Nom de l'entreprise</label>
         <input class="string pro" id="company" name="company" />
 
-        <label for="lastName">Nom du contact</label>
+        <label for="lastName">Nom de famille du contact</label>
         <input class="string" id="lastName" name="lastName" />
 
-        <label for="contactName">Nom du contact</label>
+        <label for="contactName">Prénom du contact</label>
         <input class="string" id="contactName" name="name" />
       </div>
 
@@ -157,6 +157,15 @@ export default {
 .client {
   input {
     margin-bottom: 1.2em;
+  }
+}
+
+#status {
+  display: flex;
+  margin: 1em 0;
+
+  & > div {
+    margin-right: 1.5em;
   }
 }
 </style>
