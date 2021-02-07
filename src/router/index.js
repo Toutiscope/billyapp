@@ -14,7 +14,13 @@ const routes = [
     path: "/devis",
     name: "Devis",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Devis.vue"),
+      import("../views/Devis.vue"),
+  },
+  {
+    path: "/client",
+    name: "Client",
+    component: () =>
+      import("../views/Client.vue"),
   },
   {
     path: "/parametres",

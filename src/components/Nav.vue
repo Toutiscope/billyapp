@@ -12,7 +12,7 @@
         </router-link>
       </li>
       <li>
-        <a href="#">
+        <a href="/client">
           Nouveau client
           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32">
             <g fill="none" stroke="#fff" stroke-width="5">

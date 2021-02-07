@@ -19,10 +19,11 @@
     <form @submit="updateMaterial">
       <div id="material">
         <label class="name" for="materialName">Nom du matériau</label>
-        <input type="text" v-model="material.name" required />
+        <input type="text" id="materialName" v-model="material.name" required />
 
         <label for="priceMaterialKg">Prix de la bobine au kilo</label>
         <input
+         id="priceMaterialKg"
           type="number"
           min="0"
           step="0.01"
@@ -32,6 +33,7 @@
 
         <label for="fdp">Frais de port</label>
         <input
+        id="fdp"
           type="number"
           min="0"
           step="0.01"
@@ -41,6 +43,7 @@
 
         <label for="nbMaterialOrdered">Nb de bobines par commande</label>
         <input
+        id="nbMaterialOrdered"
           type="number"
           min="0"
           step="0.01"
@@ -50,6 +53,7 @@
 
         <label for="fdpandMaterial">1 bobine + fdp divisés</label>
         <input
+        id="fdpandMaterial"
           type="number"
           min="0"
           step="0.01"
@@ -85,7 +89,7 @@ export default {
   },
 
   updated() {
-    this.calcul()
+    this.calcul();
   },
 
   methods: {
@@ -113,10 +117,12 @@ export default {
     calcul: function() {
       let material = this.material;
 
-      material.feesandMaterial =
-        (material.shippingFees / material.nbOrdered + material.priceKg).toFixed(2);
+      material.feesandMaterial = (
+        material.shippingFees / material.nbOrdered +
+        material.priceKg
+      ).toFixed(2);
 
-        return material.feesandMaterial;
+      return material.feesandMaterial;
     },
     // newMaterial: function() {
     //   let material = this.material;
@@ -175,25 +181,20 @@ export default {
 </script>
 
 <style lang="scss">
-body {
-  background: #f5f5f5;
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-}
+@import "../styles/globalStyles.scss";
 
 .title {
+  align-items: center;
   border-bottom: 2px solid #662483;
   background-color: #ffffff;
   display: flex;
   justify-content: flex-end;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 5px -2px;
   margin: 0 0 4rem 0;
-  padding: 0 2.5rem;
+  padding: 0.5rem 2.5rem;
 
   svg {
     height: 35px;
-    transform: translateY(40%);
     fill: #54cac0;
   }
 
@@ -216,12 +217,7 @@ body {
   }
 
   input {
-    border: none;
-    border-radius: 4px;
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 3px 0px inset;
-    font-weight: bold;
     margin-left: 4vw;
-    padding: 0.5em;
     text-align: center;
 
     &:last-child {

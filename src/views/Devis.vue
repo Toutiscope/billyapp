@@ -2,7 +2,7 @@
   <div class="estimation">
     <div class="head">
       <div class="head--client">
-        <div class="client-id" v-if="!client">
+        <router-link to="/client" class="client-id" v-if="client">
           <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24">
             <path
               d="M12 5.9a2.1 2.1 0 110 4.2 2.1 2.1 0 010-4.2m0 9c2.97 0 6.1 1.46 6.1 2.1v1.1H5.9V17c0-.64 3.13-2.1 6.1-2.1M12 4C9.79 4 8 5.79 8 8s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 9c-2.67 0-8 1.34-8 4v3h16v-3c0-2.66-5.33-4-8-4z"
@@ -14,8 +14,8 @@
           <p>44300 NANTES</p>
           <p>06 01 02 03 04</p>
           <p>adresse-mail@gmail.com</p>
-        </div>
-        <router-link to="#" v-if="client">
+        </router-link>
+        <router-link class="add-client" to="/client" v-if="!client">
           <div class="circle">
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32">
               <g fill="none" stroke="#fff" stroke-width="5">
@@ -28,7 +28,7 @@
       </div>
       <div class="head--meta">
         <h1>Devis n°1</h1>
-        <p>{{ moment(new Date()).format('DD/MM/YYYY') }}</p>
+        <p>{{ moment(new Date()).format("DD/MM/YYYY") }}</p>
       </div>
     </div>
 
@@ -41,7 +41,7 @@
       </li>
 
       <li>
-        <p>Pièce n°1</p>
+        <p>Pièce n°1 {{ currentUrl }}</p>
         <p>20 €</p>
         <p>2</p>
         <p>40 €</p>
@@ -81,15 +81,20 @@
         <label for="delivery-yes">Oui</label>
       </div>
       <p v-if="checked">Montant</p>
-      <input v-if="checked" required type="text" placeholder="Frais de livraison en €" />
+      <input
+        v-if="checked"
+        required
+        type="text"
+        placeholder="Frais de livraison en €"
+      />
     </div>
 
     <div class="validations">
       <router-link to="#">
-        <button>Imprimer</button>
+        <button class="btn btn--secondary">Imprimer</button>
       </router-link>
       <router-link to="/">
-        <button>Enregistrer</button>
+        <button class="btn btn--main">Enregistrer</button>
       </router-link>
     </div>
   </div>
@@ -101,18 +106,24 @@ import moment from "moment";
 
 Vue.prototype.moment = moment;
 
+var currentUrl = window.location;
 
 export default {
   data() {
     return {
       checked: false,
       client: false,
+      currentUrl: currentUrl,
     };
   },
   methods: {
     checkDelivery: function() {
       this.checked = !this.checked;
     },
+  },
+
+  mounted() {
+      this.currentUrl = this.$route.query.c;
   },
 };
 </script>
@@ -178,7 +189,7 @@ export default {
     box-shadow: 4px 4px 9px rgba(0, 0, 0, 0.16);
     width: 45%;
 
-    a {
+    .add-client {
       align-items: center;
       background: var(--main-light);
       display: flex;
@@ -281,28 +292,8 @@ export default {
   margin-top: auto;
   margin-bottom: remCalc(40);
 
-  button {
-    border: 3px solid var(--second-color);
-    cursor: pointer;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-  }
-
-  a:first-child button {
-    background: transparent;
-    color: var(--second-color);
-    padding: remCalc(14) remCalc(48);
-  }
-
   a:last-child {
     margin-left: remCalc(28);
-
-    button {
-      background: var(--second-color);
-      color: white;
-      padding: remCalc(14) remCalc(80);
-    }
   }
 }
 </style>

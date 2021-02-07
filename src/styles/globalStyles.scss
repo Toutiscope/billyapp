@@ -166,3 +166,35 @@ a {
   text-decoration: none;
   color: var(--font-color);
 }
+
+
+// BUTTONS
+.btn {
+    border: 3px solid var(--second-color);
+    cursor: pointer;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+
+    &--secondary {
+        background: transparent;
+        color: var(--second-color);
+        padding: remCalc(14) remCalc(48);
+      }
+    
+    
+    &--main {
+        background: var(--second-color);
+        color: white;
+        padding: remCalc(14) remCalc(80);
+      }
+}
+
+// INPUTS
+
+input:not([type=radio]) {
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 3px 0px inset;
+    font-weight: bold;
+    padding: 0.5em;
+}
