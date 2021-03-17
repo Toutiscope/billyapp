@@ -135,6 +135,12 @@ const mainMenuTemplate = [
       mainWindow.webContents.goBack();
     },
   },
+  {
+    label: "Accueil",
+    click() {
+      mainWindow.webContents.goToIndex(0);
+    },
+  },
 ];
 
 // Fix display menuItem pb on Mac

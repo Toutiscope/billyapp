@@ -18,7 +18,7 @@
           @click="storeCustomer(customer._id)"
         >
         <button type="button">
-          <p>
+          <p v-if="customer.company">
             <strong>{{ customer.company }}</strong>
           </p>
           <p>{{ customer.lastName }} {{ customer.name }}</p>

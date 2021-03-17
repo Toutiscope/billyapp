@@ -136,7 +136,7 @@ export default {
     this.currentUrl = this.$route.query.c;
     if (sessionStorage.customer) {
       this.selectedID = sessionStorage.customer;
-      console.log(this.selectedID);
+      // console.log(this.selectedID);
       
       if (this.selectedID) {
         axios
