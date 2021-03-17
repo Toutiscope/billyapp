@@ -23,7 +23,7 @@
 
         <label for="priceMaterialKg">Prix de la bobine au kilo</label>
         <input
-         id="priceMaterialKg"
+          id="priceMaterialKg"
           type="number"
           min="0"
           step="0.01"
@@ -33,7 +33,7 @@
 
         <label for="fdp">Frais de port</label>
         <input
-        id="fdp"
+          id="fdp"
           type="number"
           min="0"
           step="0.01"
@@ -43,7 +43,7 @@
 
         <label for="nbMaterialOrdered">Nb de bobines par commande</label>
         <input
-        id="nbMaterialOrdered"
+          id="nbMaterialOrdered"
           type="number"
           min="0"
           step="0.01"
@@ -53,14 +53,14 @@
 
         <label for="fdpandMaterial">1 bobine + fdp divisés</label>
         <input
-        id="fdpandMaterial"
+          id="fdpandMaterial"
           type="number"
           min="0"
           step="0.01"
-          v-model="material.feesandMaterial"
+          :value="calcul()"
         />
       </div>
-      <!-- <span>{{ calcul() }}</span> -->
+
       <button type="submit">Enregistrer</button>
     </form>
   </div>
@@ -88,9 +88,9 @@ export default {
     this.fetchData();
   },
 
-  updated() {
-    this.calcul();
-  },
+  // updated() {
+  //   this.calcul();
+  // },
 
   methods: {
     fetchData: function() {
@@ -117,12 +117,10 @@ export default {
     calcul: function() {
       let material = this.material;
 
-      material.feesandMaterial = (
-        material.shippingFees / material.nbOrdered +
-        material.priceKg
-      ).toFixed(2);
+      material.feesandMaterial =
+        material.shippingFees / material.nbOrdered + material.priceKg;
 
-      return material.feesandMaterial;
+      return parseFloat(material.feesandMaterial).toFixed(2);
     },
     // newMaterial: function() {
     //   let material = this.material;
@@ -153,7 +151,8 @@ export default {
           feesByNb: material.feesandMaterial,
         })
         .then(function() {
-          alert("Enregistré");
+          // alert("Enregistré");
+          window.close();
         })
         .catch(function(error) {
           alert(error);
