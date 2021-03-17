@@ -15,8 +15,21 @@
         <li
           v-for="(customer, index) in filteredCustomers"
           :key="`customer-${index}`"
+          @click="storeCustomer(customer._id)"
         >
-          <p><strong>{{ customer.company }}</strong></p><p> {{ customer.lastName }} {{ customer.name }}</p><p>{{ customer.mail }}</p><p>{{ customer.tel }}</p><p>{{ customer.street }}</p><p>{{ customer.city }}</p><p><em>{{ customer.note }}</em></p>
+        <button type="button">
+          <p>
+            <strong>{{ customer.company }}</strong>
+          </p>
+          <p>{{ customer.lastName }} {{ customer.name }}</p>
+          <p>{{ customer.mail }}</p>
+          <p>{{ customer.tel }}</p>
+          <p>{{ customer.street }}</p>
+          <p>{{ customer.city }}</p>
+          <p>
+            <em>{{ customer.note }}</em>
+          </p>
+          </button>
         </li>
       </ul>
     </form>
@@ -39,6 +52,12 @@ export default {
       .then((response) => (this.customers = response.data))
       .catch((error) => console.log(error));
   },
+  methods: {
+    storeCustomer(newCustomer) {
+      sessionStorage.customer = newCustomer;
+      return this.$router.push("/devis");
+    },
+  },
   computed: {
     filteredCustomers: function() {
       var customers_array = this.customers,
@@ -51,7 +70,10 @@ export default {
       searchCustomer = searchCustomer.trim().toLowerCase();
 
       customers_array = customers_array.filter(function(item) {
-        if (item.name.toLowerCase().indexOf(searchCustomer) !== -1 || item.company.toLowerCase().indexOf(searchCustomer) !== -1) {
+        if (
+          item.name.toLowerCase().indexOf(searchCustomer) !== -1 ||
+          item.company.toLowerCase().indexOf(searchCustomer) !== -1
+        ) {
           return item;
         }
       });
@@ -68,13 +90,23 @@ export default {
 
 #customersList {
   ul {
-      padding: 2em;
+    padding: 2em;
 
-    li {
-        display: flex;
-        padding: 0.5em;
-        text-align: left;
+    li button {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      padding: 0.5em;
+      text-align: left;
+      width: 100%;
+
+      &:focus, &:active {
+        background: var(--main-color);
+        outline: 1px solid var(--second-color);
+      }
     }
+
     li:nth-child(odd) {
       background: #e4e4e4;
     }
@@ -84,7 +116,7 @@ export default {
     }
 
     p {
-        margin: auto 0.5em;
+      margin: auto 0.5em;
     }
   }
 }

@@ -87,7 +87,6 @@ export default {
         tel: 3,
         mail: "test",
         note: "test",
-        // id: null,
       },
     };
   },
@@ -111,7 +110,6 @@ export default {
           console.log(error);
         });
     },
-
     createCustomer: function() {
       let self = this;
       let customer = this.customer;
@@ -130,7 +128,7 @@ export default {
         })
         .then(function(response) {
           if (response.status === 201) {
-            self.$router.push("/devis?c="+ response.data._id);
+            self.$router.push("/devis?c=" + response.data._id);
             console.log(response.data._id);
             console.log(self.$router);
           }

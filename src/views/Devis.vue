@@ -2,20 +2,28 @@
   <div class="estimation">
     <div class="head">
       <div class="head--client">
-        <router-link to="/client" class="client-id" v-if="client">
+        <router-link
+          to="/clientsliste"
+          class="client-id"
+          v-if="selectedCustomer"
+        >
           <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24">
             <path
               d="M12 5.9a2.1 2.1 0 110 4.2 2.1 2.1 0 010-4.2m0 9c2.97 0 6.1 1.46 6.1 2.1v1.1H5.9V17c0-.64 3.13-2.1 6.1-2.1M12 4C9.79 4 8 5.79 8 8s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 9c-2.67 0-8 1.34-8 4v3h16v-3c0-2.66-5.33-4-8-4z"
             />
           </svg>
-          <p>Monsieur Dupont</p>
-          <p>Nom de Société</p>
-          <p>4 rue Anita Conti</p>
-          <p>44300 NANTES</p>
-          <p>06 01 02 03 04</p>
-          <p>adresse-mail@gmail.com</p>
+          <p>{{ selectedCustomer.name }} {{ selectedCustomer.lastName }}</p>
+          <p v-if="selectedCustomer.company">{{ selectedCustomer.company }}</p>
+          <p>{{ selectedCustomer.street }}</p>
+          <p>{{ selectedCustomer.city }}</p>
+          <p>{{ selectedCustomer.tel }}</p>
+          <p>{{ selectedCustomer.mail }}</p>
         </router-link>
-        <router-link class="add-client" to="/clientsliste" v-if="!client">
+        <router-link
+          class="add-client"
+          to="/clientsliste"
+          v-if="!selectedCustomer"
+        >
           <div class="circle">
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32">
               <g fill="none" stroke="#fff" stroke-width="5">
@@ -103,6 +111,7 @@
 <script>
 import Vue from "vue";
 import moment from "moment";
+import axios from "axios";
 
 Vue.prototype.moment = moment;
 
@@ -114,6 +123,8 @@ export default {
       checked: false,
       client: false,
       currentUrl: currentUrl,
+      selectedCustomer: null,
+      selectedID: null,
     };
   },
   methods: {
@@ -121,9 +132,19 @@ export default {
       this.checked = !this.checked;
     },
   },
-
   mounted() {
-      this.currentUrl = this.$route.query.c;
+    this.currentUrl = this.$route.query.c;
+    if (sessionStorage.customer) {
+      this.selectedID = sessionStorage.customer;
+      console.log(this.selectedID);
+      
+      if (this.selectedID) {
+        axios
+          .get(`http://localhost:3000/customer/${this.selectedID}`)
+          .then((response) => (this.selectedCustomer = response.data))
+          .catch((error) => console.log(error));
+      }
+    }
   },
 };
 </script>
