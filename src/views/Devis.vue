@@ -48,15 +48,28 @@
         <p>Total HT</p>
       </li>
 
-      <li>
-        <p>Pièce n°1 {{ currentUrl }}</p>
+      <li v-if="prints[0]">
+        <p>Pièce n°1</p>
         <p>20 €</p>
         <p>2</p>
         <p>40 €</p>
       </li>
+
+      <li v-else>
+        <router-link to="/product" class="new-product">
+          <div class="circle">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32">
+              <g fill="none" stroke="#fff" stroke-width="5">
+                <path d="M16 0v32M32 16H0" />
+              </g>
+            </svg>
+          </div>
+          <p>Ajouter une pièce</p>
+        </router-link>
+      </li>
     </ul>
 
-    <router-link to="#" class="add-product">
+    <router-link to="/product" class="add-product" v-if="prints[0]">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16">
         <g fill="none" stroke="#7de8dd" stroke-width="4">
           <path d="M8 0v16M16 8H0" />
@@ -125,6 +138,11 @@ export default {
       currentUrl: currentUrl,
       selectedCustomer: null,
       selectedID: null,
+      prints: [
+        // {
+        //   ok: "ok"
+        // }
+      ],
     };
   },
   methods: {
@@ -137,7 +155,7 @@ export default {
     if (sessionStorage.customer) {
       this.selectedID = sessionStorage.customer;
       // console.log(this.selectedID);
-      
+
       if (this.selectedID) {
         axios
           .get(`http://localhost:3000/customer/${this.selectedID}`)
@@ -259,6 +277,30 @@ export default {
       box-shadow: 4px 4px 9px rgba(0, 0, 0, 0.16);
       padding: remCalc(31) 0;
     }
+  }
+
+  .new-product {
+    align-items: center;
+    display: flex;
+    margin: -1em 0;
+
+    p {
+      font-weight: bold;
+      letter-spacing: remCalc(2);
+      margin-left: remCalc(34);
+      text-transform: uppercase;
+    }
+  }
+
+  .circle {
+    align-items: center;
+    background: var(--main-light);
+    display: flex;
+    height: 60px;
+    justify-content: center;
+    margin-left: remCalc(54);
+    padding: 0;
+    width: 60px;
   }
 }
 
