@@ -135,7 +135,7 @@ export default {
     return {
       checked: false,
       client: false,
-      currentUrl: currentUrl,
+      // currentUrl: currentUrl,
       selectedCustomer: null,
       selectedID: null,
       prints: [
@@ -151,7 +151,8 @@ export default {
     },
   },
   mounted() {
-    this.currentUrl = this.$route.query.c;
+    console.log(currentUrl);
+    // this.currentUrl = this.$route.query.c;
     if (sessionStorage.customer) {
       this.selectedID = sessionStorage.customer;
       // console.log(this.selectedID);

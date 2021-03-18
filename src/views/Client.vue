@@ -73,6 +73,8 @@ import axios from "axios";
 // https://www.smashingmagazine.com/2020/01/data-components-vue-js/
 // Redirect with data https://stackoverflow.com/questions/49599274/how-to-submit-a-form-in-vue-redirect-to-a-new-route-and-pass-the-parameters
 
+var currentUrl = window.location;
+
 export default {
   data() {
     return {
@@ -93,6 +95,10 @@ export default {
 
   created() {
     this.fetchData();
+  },
+
+  mounted() {
+    console.log(currentUrl);
   },
 
   methods: {

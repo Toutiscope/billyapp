@@ -23,6 +23,12 @@ const routes = [
       import("../views/Client.vue"),
   },
   {
+    path: "/client/:id",
+    name: "ClientUpdate",
+    component: () =>
+      import("../views/ClientUpdate.vue"),
+  },
+  {
     path: "/clientsliste",
     name: "ClientsListe",
     component: () =>
