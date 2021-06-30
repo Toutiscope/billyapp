@@ -8,37 +8,37 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home,
+    component: Home
+  },
+  {
+    path: "/auth",
+    name: "Auth",
+    component: () => import("../views/Auth.vue")
   },
   {
     path: "/devis",
     name: "Devis",
-    component: () =>
-      import("../views/Devis.vue"),
+    component: () => import("../views/Devis.vue")
   },
   {
     path: "/client",
     name: "Client",
-    component: () =>
-      import("../views/Client.vue"),
+    component: () => import("../views/Client.vue")
   },
   {
     path: "/client/:id",
     name: "ClientUpdate",
-    component: () =>
-      import("../views/ClientUpdate.vue"),
+    component: () => import("../views/ClientUpdate.vue")
   },
   {
     path: "/clientsliste",
     name: "ClientsListe",
-    component: () =>
-      import("../views/ClientsListe.vue"),
+    component: () => import("../views/ClientsListe.vue")
   },
   {
     path: "/product",
     name: "Product",
-    component: () =>
-      import("../views/Product.vue"),
+    component: () => import("../views/Product.vue")
   },
   {
     path: "/parametres",
@@ -47,14 +47,14 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Parametres.vue"),
-  },
+      import(/* webpackChunkName: "about" */ "../views/Parametres.vue")
+  }
 ];
 
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
-  routes,
+  routes
 });
 
 export default router;

@@ -25,12 +25,21 @@
         <a href="#"> Mes devis / factures</a>
       </li>
     </ul>
+    <a class="logout" href @click.prevent="logOut">
+      Déconnexion
+    </a>
   </div>
 </template>
 
 <script>
 export default {
   name: "Nav",
+  methods: {
+    logOut() {
+      this.$store.dispatch("auth/logout");
+      this.$router.push("/auth");
+    }
+  }
 };
 </script>
 
@@ -69,5 +78,13 @@ export default {
       margin-left: remCalc(62);
     }
   }
+}
+
+.logout {
+  border: 1px solid white;
+  position: absolute;
+  left: remCalc(70);
+  bottom: remCalc(40);
+  padding: 5px;
 }
 </style>

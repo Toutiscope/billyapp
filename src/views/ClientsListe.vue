@@ -30,7 +30,11 @@
               <em>{{ customer.note }}</em>
             </p>
           </button>
-          <button type="button" class="modify" @click="modifyCustomer(customer._id)">
+          <button
+            type="button"
+            class="modify"
+            @click="modifyCustomer(customer._id)"
+          >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
               <path d="M6.4 36.4l32-32 6.5 6.4-32.1 32z" />
               <path
@@ -57,14 +61,14 @@ export default {
   data() {
     return {
       searchCustomer: "",
-      customers: null,
+      customers: null
     };
   },
   mounted() {
     axios
       .get("http://localhost:3000/customer")
-      .then((response) => (this.customers = response.data))
-      .catch((error) => console.log(error));
+      .then(response => (this.customers = response.data))
+      .catch(error => console.log(error));
   },
   methods: {
     storeCustomer(newCustomer) {
@@ -74,7 +78,7 @@ export default {
     modifyCustomer(newCustomer) {
       sessionStorage.customer = newCustomer;
       return this.$router.push(`/client/${newCustomer}`);
-    },
+    }
   },
   computed: {
     filteredCustomers: function() {
@@ -96,8 +100,8 @@ export default {
         }
       });
       return customers_array;
-    },
-  },
+    }
+  }
 };
 </script>
 
